@@ -1,7 +1,7 @@
 const { text } = require('express')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const categorySchema = new Schema({
+const userSchema = new Schema({
   _id: {
     type: Number
   },
@@ -10,4 +10,4 @@ const categorySchema = new Schema({
     required: true
   }
 }, { _id: false })
-module.exports = mongoose.model('Category', categorySchema)
+module.exports = mongoose.model('User', userSchema)
