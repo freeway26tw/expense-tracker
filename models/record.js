@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+mongoose.set("strictQuery", false)
 const autoIncrement = require('mongoose-sequence')(mongoose)
 
 const recordSchema = new mongoose.Schema({
@@ -21,6 +22,6 @@ const recordSchema = new mongoose.Schema({
     ref: 'Category'
   }
 })
-recordSchema.plugin(autoIncrement)
+recordSchema.plugin(autoIncrement, { id: 'record_id_counter', inc_field: '_id' })
 
 module.exports = mongoose.model('Record', recordSchema)

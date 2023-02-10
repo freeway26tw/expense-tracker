@@ -1,6 +1,7 @@
-module.exports = function(SEED_DATA, connectSchema) {
+module.exports = function (SEED_DATA, connectSchema) {
 
   const mongoose = require('mongoose')
+  mongoose.set("strictQuery", false)
 
   if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
@@ -16,7 +17,9 @@ module.exports = function(SEED_DATA, connectSchema) {
 
   const seedDB = async () => {
     await connectSchema.deleteMany({})
-    await connectSchema.create(SEED_DATA)
+    for (let i = 0; i < SEED_DATA.length; i++) {
+      await connectSchema.create(SEED_DATA[i])
+    } 
   }
 
   seedDB().then(() => {
