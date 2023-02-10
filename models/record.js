@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const recordSchema = new Schema({
-  _id: {
-    type: Number
-  },
+const autoIncrement = require('mongoose-sequence')(mongoose)
+
+const recordSchema = new mongoose.Schema({
+  _id: Number,
   name: String,
   date: {
     type: Date,
@@ -14,12 +13,14 @@ const recordSchema = new Schema({
     min: 0
   },
   userId: {
-    type: Schema.Types.ObjectId,
+    type: Number,
     ref: 'User'
   },
   categoryId: {
-    type: Schema.Types.ObjectId,
+    type: Number,
     ref: 'Category'
   }
-}, { _id: false })
+})
+recordSchema.plugin(autoIncrement)
+
 module.exports = mongoose.model('Record', recordSchema)

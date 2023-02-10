@@ -1,13 +1,13 @@
-const { text } = require('express')
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const categorySchema = new Schema({
-  _id: {
-    type: Number
-  },
+const autoIncrement = require('mongoose-sequence')(mongoose)
+
+const categorySchema = new mongoose.Schema({
+  _id: Number,
   name: {
     type: String,
     required: true
   }
-}, { _id: false })
+})
+categorySchema.plugin(autoIncrement)
+
 module.exports = mongoose.model('Category', categorySchema)
