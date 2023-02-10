@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 mongoose.set("strictQuery", false)
 const autoIncrement = require('mongoose-sequence')(mongoose)
-
-const userSchema = new mongoose.Schema({
+const Schema = mongoose.Schema
+const userSchema = new Schema({
   _id: Number,
   name: {
     type: String,

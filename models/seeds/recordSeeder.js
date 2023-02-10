@@ -1,4 +1,11 @@
+const User = require('../user')
 const Record = require('../record')
-const SEED_RECORDS = []
+const mongoose = require('mongoose')
 
-require('../../config/mongoose')(SEED_CATEGORIES, Record)
+const SEED_DATA = [
+  [{ name: '廣志' }],
+  [{ name: '午餐', amount: 60, userId: 1000, categoryId: 4 }]
+]
+
+// 使用mongoose.js，利用Schema產生SEED_DATA資料
+require('../../config/mongoose')(SEED_DATA, [User, Record])
