@@ -12,18 +12,18 @@ const recordSchema = new Schema({
     type: Number,
     min: 0
   },
-  userId: {
-    type: Number,
-    ref: 'User',
-    index: true,
-    required: true
-  },
-  categoryId: {
-    type: Number,
-    ref: 'Category',
-    index: true,
-    required: true
-  }
+  // userId: {
+  //   type: Number,
+  //   ref: 'User',
+  //   index: true,
+  //   required: true
+  // },
+  // categoryId: {
+  //   type: Number,
+  //   ref: 'Category',
+  //   index: true,
+  //   required: true
+  // }
 })
 recordSchema.plugin(autoIncrement, { id: 'record_id_counter', inc_field: '_id' })
 
