@@ -29,9 +29,9 @@ app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
   // console.log('hi')
-  Category.find()
+  Record.find()
     .lean()
-    .then(records => console.log(records))
+    .then(records => res.render('index', { records }))
     // .then(records => res.render('index', {records}))
     .catch(error => console.log(error))
 })
