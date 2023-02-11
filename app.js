@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
   // console.log('hi')
   Record.find()
     .lean()
+    .sort({ _id: 'desc' })
     .then(records => res.render('index', { records }))
     // .then(records => res.render('index', {records}))
     .catch(error => console.log(error))
