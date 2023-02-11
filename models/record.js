@@ -5,22 +5,21 @@ const Schema = mongoose.Schema
 const recordSchema = new Schema({
   _id: Number,
   name: String,
-  createdDate: {
-    type: Date,
-    default: Date.now
+  date: {
+    type: Date
   },
   amount: {
     type: Number,
     min: 0
   },
   userId: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: Number,
     ref: 'User',
     index: true,
     required: true
   },
   categoryId: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: Number,
     ref: 'Category',
     index: true,
     required: true
