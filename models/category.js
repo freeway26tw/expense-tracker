@@ -7,7 +7,8 @@ const categorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
-  }
+  },
+  icon: String
 })
 
 categorySchema.plugin(autoIncrement, { id: 'category_id_counter', inc_field: '_id' })

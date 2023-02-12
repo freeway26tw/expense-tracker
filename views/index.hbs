@@ -1,12 +1,50 @@
-<a href="./records/new">Create</a>
-<ul>
-  {{#each records}}
-  <li>
-    {{this.name}}
-    <a href="./records/{{ this._id }}/edit">edit</a>
-    <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-      <button type="submit">delete</button>
-    </form>
-  </li>
-  {{/each}}
-</ul>
+<div class="d-flex flex-column align-items-center">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      類別
+    </button>
+    <ul class="dropdown-menu">
+      {{#each categories}}
+      <li>
+        <a href="#">{{this.name}}</a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <p>總金額：</p>
+</div>
+
+<table class="table table-borderlesss table-striped">
+  <tbody>
+    {{#each record_category}}
+    <tr>
+      <th scope="row"><i class="fa-solid {{this.icon}} fa-5x"></i></th>
+      <td class="col-md-4">
+        <div class="col-md-9">
+          <div class="d-flex">
+            <h5 class="mb-1">{{this.name}}</h5>
+          </div>
+          <p>{{prettifyDate this.date "YYYY/MM/DD"}}</p>
+          </p>
+        </div>
+      </td>
+      <td class="col-md-4">
+        <p>{{this.amount}}</p>
+      </td>
+      <td class="col-md-2">
+        <a class="btn" href="./records/{{ this._id }}/edit">修改</a>
+      </td>
+      <td class="col-md-2">
+        <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+          <button class="btn" type="submit">刪除</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-center">
+  <a class="btn btn-primary" href="./records/new">Create</a>
+</div>

@@ -7,6 +7,7 @@ const methodOverride = require('method-override')
 
 
 const routes = require('./routes')
+const moment = require('moment/moment')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -27,7 +28,15 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
+app.engine('hbs', exphbs.engine({
+  defaultLayout: 'main', extname: '.hbs',
+  helpers: {
+    prettifyDate: function (date, format) {
+      const mmnt = moment(date);
+      return mmnt.format(format)
+    }
+  }
+}))
 app.set('view engine', 'hbs')
 
 app.use(bodyParser.urlencoded({ extended: false }))
