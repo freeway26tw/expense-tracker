@@ -7,7 +7,7 @@ const Record = require('../../models/record')
 router.get('/', async (req, res) => {
   const userId = req.user._id
   const categories = await Category.find().lean()
-  const records = await Record.find({userId}).lean()
+  const records = await Record.find({ userId }).lean()
 
   // 為了讓records map到category的icon
   let record_category = records.map(record => {
@@ -23,13 +23,16 @@ router.get('/', async (req, res) => {
       return date2 - date1;
     }
   )
-  
+
   // 篩選category
   if (req.query.categoryId) {
     record_category = record_category.filter(r => r.categoryId.toString() === req.query.categoryId)
   }
 
-  res.render('index', { record_category, categories })
+  // 計算總金額
+  let totalAmount = record_category.reduce((accumulator, currentValue)=> accumulator + currentValue.amount, 0)
+
+  res.render('index', { record_category, categories, totalAmount })
 })
 
 module.exports = router
