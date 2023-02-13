@@ -1,16 +1,14 @@
 <div class="d-flex flex-column align-items-center">
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      類別
-    </button>
-    <ul class="dropdown-menu">
-      {{#each categories}}
-      <li>
-        <a href="#">{{this.name}}</a>
-      </li>
-      {{/each}}
-    </ul>
-  </div>
+  <form action="/" method="GET">
+    <div class="dropdown">
+      <select class="form-select form-select-sm" aria-label="select sort" role="button" name="categoryId"
+        onchange="this.form.submit()">
+        {{#each categories}}
+        <option value="{{this._id}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </form>
 
   <p>總金額：</p>
 </div>

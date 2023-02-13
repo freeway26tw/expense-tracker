@@ -7,8 +7,9 @@ const Record = require('../../models/record')
 router.get('/', async (req, res) => {
   const categories = await Category.find().lean()
   const records = await Record.find().lean()
+
   // 為了讓records map到category的icon
-  const record_category = records.map(record => {
+  let record_category = records.map(record => {
     const record_check = categories.filter(c => c._id === record.categoryId)
     record_check ? record.icon = record_check[0].icon : ''
     return record
@@ -21,8 +22,11 @@ router.get('/', async (req, res) => {
       return date2 - date1;
     }
   )
-
-  console.log(record_category)
+  
+  // 篩選category
+  if (req.query.categoryId) {
+    record_category = record_category.filter(r => r.categoryId.toString() === req.query.categoryId)
+  }
 
   res.render('index', { record_category, categories })
 })
