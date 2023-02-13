@@ -4,20 +4,25 @@ const autoIncrement = require('mongoose-sequence')(mongoose)
 const Schema = mongoose.Schema
 const recordSchema = new Schema({
   _id: Number,
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   date: {
-    type: Date
+    type: Date,
+    required: true
   },
   amount: {
     type: Number,
-    min: 0
+    min: 0,
+    required: true
   },
-  // userId: {
-  //   type: Number,
-  //   ref: 'User',
-  //   index: true,
-  //   required: true
-  // },
+  userId: {
+    type: Number,
+    ref: 'User',
+    index: true,
+    required: true
+  },
   categoryId: {
     type: Number,
     ref: 'Category',

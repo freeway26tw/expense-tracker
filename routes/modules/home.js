@@ -5,8 +5,9 @@ const Category = require('../../models/category')
 const Record = require('../../models/record')
 
 router.get('/', async (req, res) => {
+  const userId = req.user._id
   const categories = await Category.find().lean()
-  const records = await Record.find().lean()
+  const records = await Record.find({userId}).lean()
 
   // 為了讓records map到category的icon
   let record_category = records.map(record => {
