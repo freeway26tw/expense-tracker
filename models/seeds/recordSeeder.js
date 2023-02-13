@@ -3,7 +3,7 @@ const Record = require('../record')
 const db = require('../../config/mongoose')
 const bcrypt = require('bcryptjs')
 
-const USER_SEED_DATA = { name: '廣志', email: 'user1@example.com', password: '123' }
+const USER_SEED_DATA = { name: '廣志', email: 'user1@example.com', password: '123', platform: 'manual' }
 
 const RECORD_SEED_DATA = [{ name: '午餐', date: '2019.4.23', amount: 60, categoryId: 4 }];
 

@@ -40,7 +40,7 @@ router.post('/register', (req, res) => {
     })
   }
 
-  User.findOne({ email }).then(user => {
+  User.findOne({ email, platform: 'manual' }).then(user => {
     if (user) {
       errors.push({ message: '這個 Email 已經註冊過了' })
       res.render('register', {
@@ -57,7 +57,8 @@ router.post('/register', (req, res) => {
       .then(hash => User.create({
         name,
         email,
-        password: hash
+        password: hash,
+        platform: 'manual'
       }))
       .then(() => res.redirect('/'))
       .catch(err => console.log(err))
