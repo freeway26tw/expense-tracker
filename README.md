@@ -33,7 +33,7 @@ password: 123
 ## Prerequisites
 
 - [Git](https://git-scm.com/downloads)
-- [Node.js v14.15.1](https://nodejs.org/en/)
+- [Node.js v14.16.0](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 - [mongoDB](https://www.mongodb.com/)
 
