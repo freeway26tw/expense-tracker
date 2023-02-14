@@ -9,6 +9,7 @@ const routes = require('./routes')
 const moment = require('moment/moment')
 const usePassport = require('./config/passport')
 
+
 require('./config/mongoose')
 
 if (process.env.NODE_ENV !== 'production') {
@@ -16,6 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const app = express()
+const PORT = process.env.PORT
 
 app.engine('hbs', exphbs.engine({
   defaultLayout: 'main', extname: '.hbs',
@@ -32,7 +34,7 @@ app.engine('hbs', exphbs.engine({
 app.set('view engine', 'hbs')
 
 app.use(session({
-  secret: SESSION_SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
