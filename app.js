@@ -25,7 +25,6 @@ app.engine('hbs', exphbs.engine({
       return mmnt.format(format)
     },
     ifEquals: function (arg1, arg2, options) {
-      // console.log(arg1, arg2)
       return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
     }
   }
@@ -33,7 +32,7 @@ app.engine('hbs', exphbs.engine({
 app.set('view engine', 'hbs')
 
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
@@ -53,6 +52,6 @@ app.use((req, res, next) => {
 
 app.use(routes)
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('App is running on http://localhost:3000')
 })
