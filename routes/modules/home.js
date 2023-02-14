@@ -1,3 +1,4 @@
+const { select } = require('async')
 const express = require('express')
 const router = express.Router()
 
@@ -8,6 +9,7 @@ router.get('/', async (req, res) => {
   const userId = req.user._id
   const categories = await Category.find().lean()
   const records = await Record.find({ userId }).lean()
+  const selectedCategoryId = req.query.categoryId
 
   // 為了讓records map到category的icon
   let record_category = records.map(record => {
@@ -25,14 +27,15 @@ router.get('/', async (req, res) => {
   )
 
   // 篩選category
-  if (req.query.categoryId) {
-    record_category = record_category.filter(r => r.categoryId.toString() === req.query.categoryId)
+  if (selectedCategoryId) {
+    record_category = record_category.filter(r => r.categoryId.toString() === selectedCategoryId)
   }
 
   // 計算總金額
-  let totalAmount = record_category.reduce((accumulator, currentValue)=> accumulator + currentValue.amount, 0)
+  let totalAmount = record_category.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0)
 
-  res.render('index', { record_category, categories, totalAmount })
+  // selectedCategoryId -1 的目的是，要去跟 #each option裡面的@index 對齊
+  res.render('index', { record_category, categories, totalAmount, selectedCategoryId: selectedCategoryId - 1 })
 })
 
 module.exports = router

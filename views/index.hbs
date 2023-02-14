@@ -3,8 +3,12 @@
     <div class="dropdown">
       <select class="form-select form-select-sm" aria-label="select sort" role="button" name="categoryId"
         onchange="this.form.submit()">
+        <option value="" selected disabled hidden>Choose here</option>
+        <option value="">全選</option>
         {{#each categories}}
-        <option value="{{this._id}}">{{this.name}}</option>
+        {{!-- 為了去取外層的變數資料，所以使用 ../ --}}
+        <option {{#ifEquals @index ../selectedCategoryId}}selected{{/ifEquals}} value="{{this._id}}">{{this.name}}
+        </option>
         {{/each}}
       </select>
     </div>

@@ -23,6 +23,10 @@ app.engine('hbs', exphbs.engine({
     prettifyDate: function (date, format) {
       const mmnt = moment(date);
       return mmnt.format(format)
+    },
+    ifEquals: function (arg1, arg2, options) {
+      // console.log(arg1, arg2)
+      return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
     }
   }
 }))
